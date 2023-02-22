@@ -20,7 +20,7 @@ namespace BeeBlog.Web.Migrations
                     PageTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PageContent = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ShortDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ImageRL = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImageURL = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     URLhandle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateOfPublication = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Author = table.Column<string>(type: "nvarchar(max)", nullable: false),

@@ -13,47 +13,47 @@
         <form method="post"> 
             <div class="mb-3">
                 <label for="heading" class="form-label">Heading</label>
-                <input type="text" class="form-control" id="heading">
+                <input type="text" class="form-control" id="heading" asp-for="AddBlogPostRequest.Heading">
             </div>
 
             <div class="mb-3">
                 <label for="pageTitle" class="form-label">Page title</label>
-                <input type="text" class="form-control" id="pageTitle">
+                <input type="text" class="form-control" id="pageTitle" asp-for="AddBlogPostRequest.PageTitle">
             </div>
 
             <div class="mb-3">
                 <label for="content" class="form-label">Content</label>
-                <textarea class="form-control" id="content"></textarea>
+                <textarea class="form-control" id="content" asp-for="AddBlogPostRequest.PageContent"></textarea>
             </div>
 
             <div class="mb-3">
                 <label for="shortDescription" class="form-label">Short description</label>
-                <input type="text" class="form-control" id="shortDescription">
+                <input type="text" class="form-control" id="shortDescription" asp-for="AddBlogPostRequest.ShortDescription">
             </div>
 
             <div class="mb-3">
-                <label for="featureImageURL" class="form-label">Feature image URL</label>
-                <input type="text" class="form-control" id="featureImageURL">
+                <label for="featuredImageURL" class="form-label">Featured image URL</label>
+                <input type="text" class="form-control" id="featuredImageURL" asp-for="AddBlogPostRequest.ImageURL">
             </div>
 
             <div class="mb-3">
                 <label for="urlHandle" class="form-label">URL handle</label>
-                <input type="text" class="form-control" id="urlHandle">
+                <input type="text" class="form-control" id="urlHandle" asp-for="AddBlogPostRequest.URLhandle">
             </div>
 
             <div class="mb-3">
                 <label for="publishedDate" class="form-label">Published date</label>
-                <input type="date" class="form-control" id="publishedDate">
+                <input type="date" class="form-control" id="publishedDate" asp-for="AddBlogPostRequest.DateOfPublication">
             </div>
 
             <div class="mb-3">
                 <label for="author" class="form-label">Author</label>
-                <input type="text" class="form-control" id="author">
+                <input type="text" class="form-control" id="author" asp-for="AddBlogPostRequest.Author">
             </div>
 
             <div class="form-check mb-3">
                 <label class="form-check-label" for="isVisible">Is Post visibe?</label>
-                <input class="form-check-input" type="checkbox" value="" id="isVisible">
+                <input class="form-check-input" type="checkbox" value="" id="isVisible" asp-for="AddBlogPostRequest.IsVisible">
             </div>
 
             <div class="mb-3">

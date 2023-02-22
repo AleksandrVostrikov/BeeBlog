@@ -1,12 +1,11 @@
-﻿namespace BeeBlog.Web.Models.Domain
+﻿namespace BeeBlog.Web.Models.ViewModels
 {
-    public class BlogPost
+    public class AddBlogPost
     {
-        public Guid Id { get; set; }
         public string Heading { get; set; }
         public string PageTitle { get; set; }
         public string PageContent { get; set; }
-        public string ShortDescription { get; set;}
+        public string ShortDescription { get; set; }
         public string ImageURL { get; set; }
         public string URLhandle { get; set; }
         public DateTime DateOfPublication { get; set; }

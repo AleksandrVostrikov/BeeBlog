@@ -64,7 +64,7 @@ namespace BeeBlog.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BlogPosts");
+                    b.ToTable("BlogPosts", (string)null);
                 });
 
             modelBuilder.Entity("BeeBlog.Web.Models.Domain.Tags", b =>
@@ -82,7 +82,7 @@ namespace BeeBlog.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tags");
+                    b.ToTable("Tags", (string)null);
                 });
 #pragma warning restore 612, 618
         }
