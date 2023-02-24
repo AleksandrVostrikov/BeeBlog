@@ -17,14 +17,14 @@ namespace BeeBlog.Web.Pages.Admin.Posts
             _beeBlogDbContext = beeBlogDbContext;
         }
 
-        public void OnGet(Guid id)
+        public async Task OnGet(Guid id)
         {
-            BlogPost = _beeBlogDbContext.BlogPosts.Find(id);
+            BlogPost = await _beeBlogDbContext.BlogPosts.FindAsync(id);
         }
 
-        public IActionResult OnPostEdit()
+        public async Task<IActionResult> OnPostEdit()
         {
-            var existingBlogPost = _beeBlogDbContext.BlogPosts.Find(BlogPost.Id);
+            var existingBlogPost = await _beeBlogDbContext.BlogPosts.FindAsync(BlogPost.Id);
             if (existingBlogPost != null)
             {
                 existingBlogPost.Heading = BlogPost.Heading;
@@ -38,17 +38,17 @@ namespace BeeBlog.Web.Pages.Admin.Posts
                 existingBlogPost.Author = BlogPost.Author;
                 existingBlogPost.IsVisible = BlogPost.IsVisible;
             }
-            _beeBlogDbContext.SaveChanges();
+            await _beeBlogDbContext.SaveChangesAsync();
             return RedirectToPage("/admin/posts/list");
         }
-        public IActionResult OnPostDelete()
+        public async Task<IActionResult> OnPostDelete()
         {
-            var existingBlogPost = _beeBlogDbContext.BlogPosts.Find(BlogPost.Id);
+            var existingBlogPost = await _beeBlogDbContext.BlogPosts.FindAsync(BlogPost.Id);
             if (existingBlogPost != null)
             {
                 _beeBlogDbContext.Remove(existingBlogPost);
             }
-            _beeBlogDbContext.SaveChanges();
+            await _beeBlogDbContext.SaveChangesAsync();
             return RedirectToPage("/admin/posts/list");
         }
     }

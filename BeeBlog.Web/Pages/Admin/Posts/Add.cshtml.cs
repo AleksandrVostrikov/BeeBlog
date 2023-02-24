@@ -20,7 +20,7 @@ namespace BeeBlog.Web.Pages.Admin.Posts
         public void OnGet()
         {
         }
-        public IActionResult OnPost()
+        public async  Task<IActionResult> OnPost()
         {
             var blogPost = new BlogPost() {
                 Heading = AddBlogPostRequest.Heading,
@@ -33,8 +33,8 @@ namespace BeeBlog.Web.Pages.Admin.Posts
                 Author = AddBlogPostRequest.Author,
                 IsVisible = AddBlogPostRequest.IsVisible,
             };
-            _beeBlogDbContext.BlogPosts.Add(blogPost);
-            _beeBlogDbContext.SaveChanges();
+            await _beeBlogDbContext.BlogPosts.AddAsync(blogPost);
+            await _beeBlogDbContext.SaveChangesAsync();
 
             return RedirectToPage("/Admin/Posts/List");
         }

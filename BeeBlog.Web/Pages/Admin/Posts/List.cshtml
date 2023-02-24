@@ -9,24 +9,35 @@
     </div>
 </div>
 
-<div class="container">
-    <table class="table">
-        <thead>
-            <tr>
-                <td>Id</td>
-                <td>Heading</td>
-                <td> </td>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.BlogPosts)
-            {
+@if(Model.BlogPosts != null && Model.BlogPosts.Any())
+{
+    <div class="container">
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@item.Id</td>
-                    <td>@item.Heading</td>
-                    <td><a href="/admin/posts/edit/@item.Id">View</a></td>
+                    <td>Id</td>
+                    <td>Heading</td>
+                    <td> </td>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.BlogPosts)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Heading</td>
+                        <td><a href="/admin/posts/edit/@item.Id">View</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="container">
+        <p>No post were found</p>
+    </div>
+}
+
+

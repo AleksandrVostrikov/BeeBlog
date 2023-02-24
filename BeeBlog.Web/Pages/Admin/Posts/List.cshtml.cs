@@ -2,6 +2,7 @@ using BeeBlog.Web.Data;
 using BeeBlog.Web.Models.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace BeeBlog.Web.Pages.Admin.Posts
 {
@@ -15,9 +16,9 @@ namespace BeeBlog.Web.Pages.Admin.Posts
             _beeBlogDbContext = beeBlogDbContext;
         }
 
-        public void OnGet()
+        public async Task OnGet()
         {
-            BlogPosts = _beeBlogDbContext.BlogPosts.ToList();
+            BlogPosts = await _beeBlogDbContext.BlogPosts.ToListAsync();
         }
     }
 }
