@@ -1,12 +1,16 @@
 using BeeBlog.Web.Data;
+using BeeBlog.Web.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+//builder.Services.AddTransient<IPostRepos, PostRepos>();
+builder.Services.AddScoped<IPostRepos, PostRepos>();
 builder.Services.AddDbContext<BeeBlogDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("BeeBlogDbConnectionString")));
+
 
 
 var app = builder.Build();

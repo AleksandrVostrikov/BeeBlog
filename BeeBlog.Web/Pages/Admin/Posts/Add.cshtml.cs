@@ -1,6 +1,7 @@
 using BeeBlog.Web.Data;
 using BeeBlog.Web.Models.Domain;
 using BeeBlog.Web.Models.ViewModels;
+using BeeBlog.Web.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -8,14 +9,14 @@ namespace BeeBlog.Web.Pages.Admin.Posts
 {
     public class AddModel : PageModel
     {
-        private readonly BeeBlogDbContext _beeBlogDbContext;
+        private readonly IPostRepos _postRepos;
 
         [BindProperty]
         public AddBlogPost AddBlogPostRequest { get; set; }
 
-        public AddModel(BeeBlogDbContext beeBlogDbContext)
+        public AddModel(IPostRepos postRepos)
         {
-            _beeBlogDbContext = beeBlogDbContext;
+            _postRepos = postRepos;
         }
         public void OnGet()
         {
@@ -33,8 +34,7 @@ namespace BeeBlog.Web.Pages.Admin.Posts
                 Author = AddBlogPostRequest.Author,
                 IsVisible = AddBlogPostRequest.IsVisible,
             };
-            await _beeBlogDbContext.BlogPosts.AddAsync(blogPost);
-            await _beeBlogDbContext.SaveChangesAsync();
+            await _postRepos.AddAsync(blogPost);
 
             return RedirectToPage("/Admin/Posts/List");
         }
