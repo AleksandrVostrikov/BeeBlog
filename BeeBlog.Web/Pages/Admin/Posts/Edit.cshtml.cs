@@ -27,8 +27,8 @@ namespace BeeBlog.Web.Pages.Admin.Posts
         public async Task<IActionResult> OnPostEdit()
         {
             await _postRepos.UpdateAsync(BlogPost);
-
-            return RedirectToPage("/admin/posts/list");
+            ViewData["MessageDescription"] = "Record was succesfully saved!";
+            return Page();
         }
         public async Task<IActionResult> OnPostDelete()
         {
