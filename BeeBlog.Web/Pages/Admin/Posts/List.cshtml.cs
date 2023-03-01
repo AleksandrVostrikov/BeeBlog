@@ -1,9 +1,11 @@
 using BeeBlog.Web.Data;
 using BeeBlog.Web.Models.Domain;
+using BeeBlog.Web.Models.ViewModels;
 using BeeBlog.Web.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 
 namespace BeeBlog.Web.Pages.Admin.Posts
 {
@@ -20,6 +22,12 @@ namespace BeeBlog.Web.Pages.Admin.Posts
 
         public async Task OnGet()
         {
+            string? notificationJson = TempData["Notification"] as string;
+            if (notificationJson != null)
+            {
+                ViewData["Notification"] = JsonSerializer.Deserialize<Notification>(notificationJson);
+            }
+
             BlogPosts = (await _postRepos.GetAllPostsAsync())?.ToList();
         }
     }

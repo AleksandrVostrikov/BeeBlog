@@ -1,0 +1,32 @@
+﻿@using BeeBlog.Web.Models.ViewModels;
+@using BeeBlog.Web.Enums
+
+@{
+    var notification = ViewData["Notification"] as Notification;
+    if (notification != null)
+    {
+        var notificationType = "";
+        switch (notification.Type)
+        {
+            case NotificationType.Success:
+                notificationType = "alert-success";
+                break;
+            case NotificationType.Info:
+                notificationType = "alert-secondary";
+                break;
+            case NotificationType.Error:
+                notificationType = "alert-danger";
+                break;
+            default:
+                notificationType = "";
+                break;
+        }
+
+        <div class="container">
+            <div class="alert @notificationType alert-dismissible fade show md-5" role="alert">
+                @Html.Raw(notification.Message)
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    }
+}

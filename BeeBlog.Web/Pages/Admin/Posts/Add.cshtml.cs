@@ -4,6 +4,7 @@ using BeeBlog.Web.Models.ViewModels;
 using BeeBlog.Web.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Text.Json;
 
 namespace BeeBlog.Web.Pages.Admin.Posts
 {
@@ -21,13 +22,13 @@ namespace BeeBlog.Web.Pages.Admin.Posts
         public void OnGet()
         {
         }
-        public async  Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPost()
         {
             var blogPost = new BlogPost() {
                 Heading = AddBlogPostRequest.Heading,
                 PageTitle = AddBlogPostRequest.PageTitle,
                 PageContent = AddBlogPostRequest.PageContent,
-                ShortDescription= AddBlogPostRequest.ShortDescription,
+                ShortDescription = AddBlogPostRequest.ShortDescription,
                 ImageURL = AddBlogPostRequest.ImageURL,
                 URLhandle = AddBlogPostRequest.URLhandle,
                 DateOfPublication = AddBlogPostRequest.DateOfPublication,
@@ -35,6 +36,13 @@ namespace BeeBlog.Web.Pages.Admin.Posts
                 IsVisible = AddBlogPostRequest.IsVisible,
             };
             await _postRepos.AddAsync(blogPost);
+
+            var notification = new Notification
+            {
+                Message = "New post created!",
+                Type = Enums.NotificationType.Success
+            };
+            TempData["Notification"] = JsonSerializer.Serialize(notification);
 
             return RedirectToPage("/Admin/Posts/List");
         }
