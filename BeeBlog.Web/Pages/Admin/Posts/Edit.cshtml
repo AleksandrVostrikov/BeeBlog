@@ -9,21 +9,6 @@
     </div>
 </div>
 
-@*@{
-    var messageDescription = ViewData["MessageDescription"] as string;
-}
-
-@if (messageDescription != null)
-{
-    <div class="container">
-        <div class="alert alert-success alert-dismissible fade show md-5" role="alert">
-            @Html.Raw(messageDescription)
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    </div>
-    
-}*@
-
 <partial name="_Notification">
 
 
@@ -95,5 +80,11 @@ else
     <div class="container">
         <p>Blog post not found!</p>
     </div>
+}
+
+@section Scripts{
+    <script>
+        var editor = new FroalaEditor('#content');
+    </script>
 }
 

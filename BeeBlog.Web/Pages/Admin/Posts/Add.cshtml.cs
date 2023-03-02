@@ -12,8 +12,8 @@ namespace BeeBlog.Web.Pages.Admin.Posts
     {
         private readonly IPostRepos _postRepos;
 
-        [BindProperty]
-        public AddBlogPost AddBlogPostRequest { get; set; }
+        [BindProperty] public AddBlogPost AddBlogPostRequest { get; set; }
+        [BindProperty] public IFormFile FeaturedImage { get; set; }
 
         public AddModel(IPostRepos postRepos)
         {
