@@ -16,6 +16,8 @@ namespace BeeBlog.Web.Pages.Admin.Posts
         [BindProperty]
         public BlogPost BlogPost { get; set; }
 
+        [BindProperty] public IFormFile FeaturedImage { get; set; }
+
         public EditModel(IPostRepos postRepos)
         {
             _postRepos = postRepos;

@@ -4,7 +4,52 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container col-xxl-8 px-4 py-5">
+    <div class="row align-items-center g-5 py-5">  
+        <div class="col-12 col-lg-6">
+            <h1 class="display-5 fw-bold lh-1 mb-3">
+                <em>BeeBlog</em> - блог о пчелах и пчеловодстве!
+            </h1>
+            <p class="lead">
+                <em>BeeBlog - это история о жизни пчел и о жизни с печелами. </em><br/>
+                Кто с добрыми пчёлками дружит, Тому даже доктор не нужен.<br/>Пчелиная семья - как будто царство, а мёд - великое богатство.
+            </p>
+        </div>
+        <div class="col-12 col-lg-6">
+            <img src="https://res.cloudinary.com/dn1kgxurh/image/upload/v1677873472/main_image_giinwp.jpg"
+                 class="d-block mx-lg-auto img-fluid" width="300"/>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            
+            @if (Model.BlogPostList != null && Model.BlogPostList.Any())
+            {
+                foreach (var blog in Model.BlogPostList)
+                {
+                    <div class="mb-5 bg-light box-shadow">
+                        <img src="@blog.ImageURL" alt="@blog.Heading" class="mb-2 d-block img-fluid" width="300"/>
+                        <div class="px-4 py-4">
+                            <h2 class="mb-2">
+                                @blog.Heading
+                            </h2>
+                            <p>
+                                Автор: @blog.Author
+                                <br/>
+                                Дата публикации: @blog.DateOfPublication.ToShortDateString()
+                            </p>
+                            <p class="mb-2">
+                                @blog.ShortDescription
+                            </p>
+                            <a href="#" class="btn btn-dark">Читать далее...</a>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
 </div>
