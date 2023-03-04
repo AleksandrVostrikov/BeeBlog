@@ -35,7 +35,7 @@ namespace BeeBlog.Web.Pages.Admin.Posts
                 await _postRepos.UpdateAsync(BlogPost);
                 ViewData["Notification"] = new Notification
                 {
-                    Message = "Record updated successfully!",
+                    Message = "Изменения успешно сохранены!",
                     Type = Enums.NotificationType.Success
                 };
             }
@@ -43,7 +43,7 @@ namespace BeeBlog.Web.Pages.Admin.Posts
             {
                 ViewData["Notification"] = new Notification
                 {
-                    Message = "Errors",
+                    Message = "Возникли ошибки",
                     Type = Enums.NotificationType.Error
                 };
                 
@@ -57,7 +57,7 @@ namespace BeeBlog.Web.Pages.Admin.Posts
             {
                 var notification = new Notification
                 {
-                    Message = "Post deleted!",
+                    Message = "Публикация удалена!",
                     Type = Enums.NotificationType.Success
                 };
                 TempData["Notification"] = JsonSerializer.Serialize(notification);

@@ -1,0 +1,18 @@
+﻿@charset "UTF-8";
+
+.head_container {
+    align-content: center;
+    justify-content: center;
+    display: flex;
+}
+
+.main_container {
+    background: #ffffff;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    height: auto;
+    width: 1600px;
+}
+
+
+

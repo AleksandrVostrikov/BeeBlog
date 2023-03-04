@@ -3,7 +3,7 @@
 @{
 }
 
-<div class="bg-secondary bg-opacity-10 py-2 mb-5">
+<div class="bg-warning bg-gradient bg-opacity-10 py-2 mb-5">
     <div class="container">
         <h1>Редактировать пост</h1>
     </div>
@@ -14,7 +14,7 @@
 @if(Model.BlogPost != null)
 {
     <div>
-        <div class="container">
+        <div class="container bg-white">
             <form method="post">
 
                 <div class="mb-3">
@@ -83,8 +83,8 @@
                 </div>
 
                 <div class="mb-3 d-flex justify-content-between">
-                    <button class="btn btn-primary" type="submit" asp-page-handler="Edit">Сохранить</button>
-                    <button class="btn btn-danger" type="submit" asp-page-handler="Delete">Удалить</button>
+                    <button class="btn btn-primary mb-3" type="submit" asp-page-handler="Edit">Сохранить</button>
+                    <button class="btn btn-danger mb-3" type="submit" asp-page-handler="Delete">Удалить</button>
                 </div>
             </form>
         </div>
@@ -93,7 +93,7 @@
 else
 {
     <div class="container">
-        <p>Blog post not found!</p>
+        <p>Публикации не найдены!</p>
     </div>
 }
 

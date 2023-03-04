@@ -40,6 +40,10 @@ namespace BeeBlog.Web.Repositories
         {
            return await _beeBlogDbContext.BlogPosts.FindAsync(id);
         }
+        public async Task<BlogPost> GetPostAsync(string urlHandle)
+        {
+            return await _beeBlogDbContext.BlogPosts.FirstOrDefaultAsync(x => x.URLhandle == urlHandle);
+        }
 
         public async Task<BlogPost> UpdateAsync(BlogPost blogPost)
         {

@@ -1,0 +1,34 @@
+﻿@page "/blog/{URLhandle}"
+@model BeeBlog.Web.Pages.Blog.DetailsModel
+@{
+    ViewData["Title"] = Model.BlogPost.PageTitle;
+}
+
+<div class="container my-5 bg-white">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6">
+            @if (Model.BlogPost != null)
+            {
+                <h1 class="mb-3">
+                    @Model.BlogPost.Heading
+                </h1>
+                
+                <div class="d-flex justify-content-between mb-3">
+                    <span>@Model.BlogPost.Author</span>
+                    <span>@Model.BlogPost.DateOfPublication.ToShortDateString()</span>
+                </div>
+
+                <img src="@Model.BlogPost.ImageURL" class="d-block img-fluid mb-3" />
+
+                <div class="mb-3 blog-details">
+                    @Html.Raw(Model.BlogPost.PageContent)
+                </div>
+
+            }
+            else
+            {
+                <h2>Публикация не найдена!</h2>
+            }
+        </div>
+    </div>
+</div>

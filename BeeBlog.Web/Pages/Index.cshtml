@@ -4,20 +4,26 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="container col-xxl-8 px-4 py-5">
-    <div class="row align-items-center g-5 py-5">  
-        <div class="col-12 col-lg-6">
-            <h1 class="display-5 fw-bold lh-1 mb-3">
-                <em>BeeBlog</em> - блог о пчелах и пчеловодстве!
-            </h1>
-            <p class="lead">
-                <em>BeeBlog - это история о жизни пчел и о жизни с печелами. </em><br/>
-                Кто с добрыми пчёлками дружит, Тому даже доктор не нужен.<br/>Пчелиная семья - как будто царство, а мёд - великое богатство.
-            </p>
-        </div>
-        <div class="col-12 col-lg-6">
-            <img src="https://res.cloudinary.com/dn1kgxurh/image/upload/v1677873472/main_image_giinwp.jpg"
+<link rel="stylesheet" href="~/css/Index.css" />
+
+<div class="head_container">
+    <div class="main_container">
+        <div class="container col-xxl-10 px-4">
+            <div class="row align-items-center g-5 py-5">  
+                <div class="col-12 col-lg-6">
+                    <h1 class="display-5 fw-bold lh-1 mb-3">
+                    <em>BeeBlog</em> - блог о пчёлах и пчеловодстве
+                    </h1>
+                    <p class="lead">
+                    <em>BeeBlog - это история о жизни пчел и о жизни с печелами. </em><br/>
+                    Кто с добрыми пчёлками дружит, тому даже доктор не нужен.<br/>Пчелиная семья - как будто царство, а мёд - великое богатство.
+                    </p>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <img src="https://res.cloudinary.com/dn1kgxurh/image/upload/v1677873472/main_image_giinwp.jpg"
                  class="d-block mx-lg-auto img-fluid" width="300"/>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -44,7 +50,7 @@
                             <p class="mb-2">
                                 @blog.ShortDescription
                             </p>
-                            <a href="#" class="btn btn-dark">Читать далее...</a>
+                            <a href="/blog/@blog.URLhandle" class="btn btn-dark">Читать далее...</a>
                         </div>
                     </div>
                 }

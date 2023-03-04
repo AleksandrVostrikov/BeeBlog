@@ -39,7 +39,7 @@ namespace BeeBlog.Web.Pages.Admin.Posts
 
             var notification = new Notification
             {
-                Message = "New post created!",
+                Message = "Публикация создана!",
                 Type = Enums.NotificationType.Success
             };
             TempData["Notification"] = JsonSerializer.Serialize(notification);

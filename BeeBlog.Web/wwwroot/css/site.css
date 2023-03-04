@@ -18,5 +18,10 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background: linear-gradient(to right, #8c5a25 0%,#8c5a25 50%,#e9ae3a 50%,#e9ae3a 100%);
+}
+
+.blog-details img{
+    max-width: 100%;
 }
