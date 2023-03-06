@@ -57,6 +57,11 @@
                 <input type="text" class="form-control" id="author" asp-for="AddBlogPostRequest.Author">
             </div>
 
+            <div class="mb3">
+                <label for="Tags" class="form-label">Tags</label>
+                <input type="text" class="form-control" id="tags" asp-for="Tags" />
+            </div>
+
             <div class="form-check mb-3">
                 <label class="form-check-label" for="isVisible">Виден всем?</label>
                 <input class="form-check-input" type="checkbox" value="" id="isVisible" asp-for="AddBlogPostRequest.IsVisible">
@@ -65,6 +70,7 @@
             <div class="mb-3">
                 <button class="btn btn-primary mb-3" type="submit">Сохранить</button>
             </div>
+
         </form>
     </div>
 </div>

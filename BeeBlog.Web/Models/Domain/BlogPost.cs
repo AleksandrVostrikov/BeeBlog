@@ -12,5 +12,7 @@
         public DateTime DateOfPublication { get; set; }
         public string Author { get; set; }
         public bool IsVisible { get; set; }
+
+        public ICollection<Tags> Tags { get;set; }
     }
 }

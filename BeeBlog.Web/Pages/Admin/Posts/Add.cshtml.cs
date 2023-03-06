@@ -14,6 +14,7 @@ namespace BeeBlog.Web.Pages.Admin.Posts
 
         [BindProperty] public AddBlogPost AddBlogPostRequest { get; set; }
         [BindProperty] public IFormFile FeaturedImage { get; set; }
+        [BindProperty] public String Tags { get; set; }
 
         public AddModel(IPostRepos postRepos)
         {
@@ -34,6 +35,7 @@ namespace BeeBlog.Web.Pages.Admin.Posts
                 DateOfPublication = AddBlogPostRequest.DateOfPublication,
                 Author = AddBlogPostRequest.Author,
                 IsVisible = AddBlogPostRequest.IsVisible,
+                Tags = new List<Tags>(Tags.Split(',').Select(x => new Tags() { Name = x.Trim()}))
             };
             await _postRepos.AddAsync(blogPost);
 

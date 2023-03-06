@@ -33,21 +33,24 @@ namespace BeeBlog.Web.Repositories
 
         public async Task<IEnumerable<BlogPost>> GetAllPostsAsync()
         {
-            return await _beeBlogDbContext.BlogPosts.ToListAsync();
+            return await _beeBlogDbContext.BlogPosts.Include(nameof(BlogPost.Tags)).ToListAsync();
         }
 
         public async Task<BlogPost> GetPostAsync(Guid id)
         {
-           return await _beeBlogDbContext.BlogPosts.FindAsync(id);
+            return await _beeBlogDbContext.BlogPosts.Include(nameof(BlogPost.Tags))
+                 .FirstOrDefaultAsync(x => x.Id == id);
         }
         public async Task<BlogPost> GetPostAsync(string urlHandle)
         {
-            return await _beeBlogDbContext.BlogPosts.FirstOrDefaultAsync(x => x.URLhandle == urlHandle);
+            return await _beeBlogDbContext.BlogPosts.Include(nameof(BlogPost.Tags))
+                .FirstOrDefaultAsync(x => x.URLhandle == urlHandle);
         }
 
         public async Task<BlogPost> UpdateAsync(BlogPost blogPost)
         {
-            var existingBlogPost = await _beeBlogDbContext.BlogPosts.FindAsync(blogPost.Id);
+            var existingBlogPost = await _beeBlogDbContext.BlogPosts.Include(nameof(BlogPost.Tags))
+                .FirstOrDefaultAsync(x => x.Id == blogPost.Id);
             if (existingBlogPost != null)
             {
                 existingBlogPost.Heading = blogPost.Heading;
@@ -60,6 +63,16 @@ namespace BeeBlog.Web.Repositories
                 existingBlogPost.DateOfPublication = blogPost.DateOfPublication;
                 existingBlogPost.Author = blogPost.Author;
                 existingBlogPost.IsVisible = blogPost.IsVisible;
+
+                
+                if (blogPost.Tags != null && blogPost.Tags.Any())
+                {
+                    _beeBlogDbContext.Tags.RemoveRange(existingBlogPost.Tags);
+
+                    blogPost.Tags.ToList().ForEach(x => x.BlogPostId = existingBlogPost.Id);
+                    await _beeBlogDbContext.Tags.AddRangeAsync(blogPost.Tags);
+                }
+
             }
             await _beeBlogDbContext.SaveChangesAsync();
             return existingBlogPost;
