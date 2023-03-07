@@ -25,3 +25,7 @@ body {
 .blog-details img{
     max-width: 100%;
 }
+
+.tag-link {
+    text-decoration: none;
+}

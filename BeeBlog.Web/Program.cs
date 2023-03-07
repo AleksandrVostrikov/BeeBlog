@@ -4,17 +4,16 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddControllers();
+
 builder.Services.AddScoped<IPostRepos, PostRepos>();
 builder.Services.AddScoped<IImageRepos, ImageRepos>();
+builder.Services.AddScoped<ITagRepos, TagRepos>();
+
 builder.Services.AddDbContext<BeeBlogDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("BeeBlogDbConnectionString")));
-
-
 
 var app = builder.Build();
 
@@ -28,12 +27,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthorization();
-
 app.MapRazorPages();
 app.MapControllers();
-
 app.Run();

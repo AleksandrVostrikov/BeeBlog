@@ -5,6 +5,7 @@ namespace BeeBlog.Web.Repositories
     public interface IPostRepos
     {
         Task<IEnumerable<BlogPost>> GetAllPostsAsync();
+        Task<IEnumerable<BlogPost>> GetAllPostsAsync(string tagName);
         Task<BlogPost> GetPostAsync(Guid id);
         Task<BlogPost> GetPostAsync(string URLhandle);
         Task<BlogPost> AddAsync(BlogPost blogPost);

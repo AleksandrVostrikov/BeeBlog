@@ -1,0 +1,36 @@
+﻿@page "/tag/{tagName}"
+@model BeeBlog.Web.Pages.Tag.DetailsModel
+@{
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6">
+
+            @if (Model.BlogPostList != null && Model.BlogPostList.Any())
+            {
+                foreach (var blog in Model.BlogPostList)
+                {
+                    <div class="mb-5 bg-light box-shadow">
+                        <img src="@blog.ImageURL" alt="@blog.Heading" class="mb-2 d-block img-fluid" width="300" />
+                        <div class="px-4 py-4">
+                            <h2 class="mb-2">
+                                @blog.Heading
+                            </h2>
+                            <p>
+                                Автор: @blog.Author
+                                <br />
+                                Дата публикации: @blog.DateOfPublication.ToShortDateString()
+                            </p>
+                            <p class="mb-2">
+                                @blog.ShortDescription
+                            </p>
+                            <a href="/blog/@blog.URLhandle" class="btn btn-dark">Читать далее...</a>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+</div>

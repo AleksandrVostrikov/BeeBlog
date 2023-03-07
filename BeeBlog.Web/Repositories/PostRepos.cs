@@ -36,6 +36,13 @@ namespace BeeBlog.Web.Repositories
             return await _beeBlogDbContext.BlogPosts.Include(nameof(BlogPost.Tags)).ToListAsync();
         }
 
+        public async Task<IEnumerable<BlogPost>> GetAllPostsAsync(string tagName)
+        {
+            return await _beeBlogDbContext.BlogPosts.Include(nameof(BlogPost.Tags))
+                .Where(x => x.Tags.Any(x => x.Name == tagName))
+                .ToListAsync();
+        }
+
         public async Task<BlogPost> GetPostAsync(Guid id)
         {
             return await _beeBlogDbContext.BlogPosts.Include(nameof(BlogPost.Tags))
@@ -77,5 +84,6 @@ namespace BeeBlog.Web.Repositories
             await _beeBlogDbContext.SaveChangesAsync();
             return existingBlogPost;
         }
+
     }
 }
