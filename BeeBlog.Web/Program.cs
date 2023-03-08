@@ -1,5 +1,6 @@
 using BeeBlog.Web.Data;
 using BeeBlog.Web.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,8 +13,14 @@ builder.Services.AddScoped<IPostRepos, PostRepos>();
 builder.Services.AddScoped<IImageRepos, ImageRepos>();
 builder.Services.AddScoped<ITagRepos, TagRepos>();
 
+//dataBases
 builder.Services.AddDbContext<BeeBlogDbContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("BeeBlogDbConnectionString")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("BeeBlogDbConnectionString")));
+
+builder.Services.AddDbContext<AuthDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("BeeBlogAythConnectionString")));
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AuthDbContext>();
 
 var app = builder.Build();
 
@@ -28,6 +35,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapRazorPages();
 app.MapControllers();
