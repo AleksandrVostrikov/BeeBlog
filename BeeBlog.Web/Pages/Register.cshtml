@@ -1,0 +1,33 @@
+﻿@page
+@model BeeBlog.Web.Pages.RegisterModel
+@{
+}
+<div class="container mx-auto">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6">
+
+            <h1 class="mb-3 h3">Регистрация</h1>
+            <partial name="_Notification" />
+            
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label">Имя пользователя</label>
+                    <input type="text" class="form-control" asp-for="RegisterViewModel.UserName" />
+
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">E-mail</label>
+                    <input type="email" class="form-control" asp-for="RegisterViewModel.Email" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Пароль</label>
+                    <input type="password" class="form-control" asp-for="RegisterViewModel.Password" />
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn bg-warning text-black">Регистрация</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

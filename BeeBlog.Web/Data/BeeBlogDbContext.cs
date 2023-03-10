@@ -5,7 +5,7 @@ namespace BeeBlog.Web.Data
 {
     public class BeeBlogDbContext : DbContext
     {
-        public BeeBlogDbContext(DbContextOptions options) : base(options)
+        public BeeBlogDbContext(DbContextOptions<BeeBlogDbContext> options) : base(options)
         {
         }
 
