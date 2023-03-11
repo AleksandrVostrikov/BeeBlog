@@ -50,7 +50,11 @@ namespace BeeBlog.Web.Data
             var superAdminUser = new IdentityUser()
             {
                 Id = superAdminId,
-                UserName = "DrevontSuperAdmin",
+                UserName = "DrevontSuper",
+                NormalizedUserName = "DREVONTSUPER",
+                Email = "bray@mail.ru",
+                NormalizedEmail = "BRAY@MAIL.RU"
+
             };
             superAdminUser.PasswordHash = new PasswordHasher<IdentityUser>()
                 .HashPassword(superAdminUser, "Bray3636@");

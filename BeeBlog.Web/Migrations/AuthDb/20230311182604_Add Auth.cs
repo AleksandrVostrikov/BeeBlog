@@ -171,7 +171,7 @@ namespace BeeBlog.Web.Migrations.AuthDb
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "ef4780a2-1047-42d3-a642-9f8ef88e6427", 0, "202fca62-d23f-4df7-9820-3070a649a046", null, false, false, null, null, null, "AQAAAAIAAYagAAAAEBv4uW6AKiU4Y1L32EJSYhkctLOP3hR4lS65OKP6Ap19sRPAEiCPnlEmjkAPvvgBVw==", null, false, "0937dbe5-430a-49b5-9336-c9b228a3df66", false, "DrevontSuperAdmin" });
+                values: new object[] { "ef4780a2-1047-42d3-a642-9f8ef88e6427", 0, "480048b3-3aba-4182-beab-0cab0cba4508", "bray@mail.ru", false, false, null, "BRAY@MAIL.RU", "DREVONTSUPER", "AQAAAAIAAYagAAAAECFP9oGtTp/Grk0jrrEdv0jthWKGV0Tnf3W0F2QqRZlxNJSzlNcq5Ql885GP0fezpg==", null, false, "2096bacc-571d-4b71-93ee-64b67ffac60d", false, "DrevontSuper" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

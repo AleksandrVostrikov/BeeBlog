@@ -29,12 +29,17 @@ namespace BeeBlog.Web.Pages
             var identityResult = await _userManager.CreateAsync(user, RegisterViewModel.Password);
             if (identityResult.Succeeded)
             {
-                ViewData["Notification"] = new Notification
+                var addRoleResult = await _userManager.AddToRoleAsync(user, "User");
+                if (addRoleResult.Succeeded)
                 {
-                    Message = "Регистрация прошла успешно!",
-                    Type = Enums.NotificationType.Success
-                };
-                return Page();
+                    ViewData["Notification"] = new Notification
+                    {
+                        Message = "Регистрация прошла успешно!",
+                        Type = Enums.NotificationType.Success
+                    };
+                    return Page();
+                }
+
             }
             ViewData["Notification"] = new Notification
             {

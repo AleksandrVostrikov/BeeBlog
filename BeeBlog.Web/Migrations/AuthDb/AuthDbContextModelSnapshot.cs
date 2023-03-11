@@ -166,14 +166,17 @@ namespace BeeBlog.Web.Migrations.AuthDb
                         {
                             Id = "ef4780a2-1047-42d3-a642-9f8ef88e6427",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "202fca62-d23f-4df7-9820-3070a649a046",
+                            ConcurrencyStamp = "480048b3-3aba-4182-beab-0cab0cba4508",
+                            Email = "bray@mail.ru",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEBv4uW6AKiU4Y1L32EJSYhkctLOP3hR4lS65OKP6Ap19sRPAEiCPnlEmjkAPvvgBVw==",
+                            NormalizedEmail = "BRAY@MAIL.RU",
+                            NormalizedUserName = "DREVONTSUPER",
+                            PasswordHash = "AQAAAAIAAYagAAAAECFP9oGtTp/Grk0jrrEdv0jthWKGV0Tnf3W0F2QqRZlxNJSzlNcq5Ql885GP0fezpg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0937dbe5-430a-49b5-9336-c9b228a3df66",
+                            SecurityStamp = "2096bacc-571d-4b71-93ee-64b67ffac60d",
                             TwoFactorEnabled = false,
-                            UserName = "DrevontSuperAdmin"
+                            UserName = "DrevontSuper"
                         });
                 });
 

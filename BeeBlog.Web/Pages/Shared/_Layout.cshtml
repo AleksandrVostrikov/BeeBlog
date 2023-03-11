@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> signInManager;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -45,9 +48,19 @@
                             </ul>
                         </li>
                     </ul>
-                    <div class="d-flex">
-                        <a href="/login" class="btn bg-light text-black me-3">Войти</a>
-                        <a href="/register" class="btn bg-light text-black me-3">Регистрация</a>
+                    <div class="d-flex align-items-center">
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <div class="me-3">
+                                @User?.Identity?.Name
+                            </div>
+                            <a href="/logout" class="btn bg-light text-black me-3">Выйти</a>
+                        }
+                        else
+                        {
+                            <a href="/login" class="btn bg-light text-black me-3">Войти</a>
+                            <a href="/register" class="btn bg-light text-black me-3">Регистрация</a>
+                        }
                     </div>
                 </div>
             </div>
