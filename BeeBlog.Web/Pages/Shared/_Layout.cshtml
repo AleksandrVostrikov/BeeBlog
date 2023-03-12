@@ -28,7 +28,9 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-page="/Index">На главную</a>
                         </li>
-                        <li class="nav-item dropdown">
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false" id="navbarDropdownAdmin">
                             Администратор
@@ -47,6 +49,7 @@
 
                             </ul>
                         </li>
+                        }
                     </ul>
                     <div class="d-flex align-items-center">
                         @if (signInManager.IsSignedIn(User))

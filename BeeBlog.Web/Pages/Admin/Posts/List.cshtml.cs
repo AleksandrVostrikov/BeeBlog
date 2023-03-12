@@ -2,6 +2,7 @@ using BeeBlog.Web.Data;
 using BeeBlog.Web.Models.Domain;
 using BeeBlog.Web.Models.ViewModels;
 using BeeBlog.Web.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using System.Text.Json;
 
 namespace BeeBlog.Web.Pages.Admin.Posts
 {
+    [Authorize(Roles = "Admin")]
     public class ListModel : PageModel
     {
         private readonly IPostRepos _postRepos;

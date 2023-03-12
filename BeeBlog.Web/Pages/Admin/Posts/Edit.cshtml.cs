@@ -2,6 +2,7 @@ using BeeBlog.Web.Data;
 using BeeBlog.Web.Models.Domain;
 using BeeBlog.Web.Models.ViewModels;
 using BeeBlog.Web.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -10,6 +11,7 @@ using System.Text.Json;
 
 namespace BeeBlog.Web.Pages.Admin.Posts
 {
+    [Authorize(Roles = "Admin")]
     public class EditModel : PageModel
     {
         private readonly IPostRepos _postRepos;
