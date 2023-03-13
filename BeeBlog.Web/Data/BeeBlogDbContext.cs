@@ -11,5 +11,6 @@ namespace BeeBlog.Web.Data
 
         public DbSet<BlogPost> BlogPosts { get; set; }
         public DbSet<Tags> Tags { get; set; }
+        public DbSet<Like> Like { get; set; }
     }
 }
