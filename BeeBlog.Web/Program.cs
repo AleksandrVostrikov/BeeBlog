@@ -13,6 +13,7 @@ builder.Services.AddScoped<IPostRepos, PostRepos>();
 builder.Services.AddScoped<IImageRepos, ImageRepos>();
 builder.Services.AddScoped<ITagRepos, TagRepos>();
 builder.Services.AddScoped<ILikesRepos, LikesRepos>();
+builder.Services.AddScoped<IBlogPostCommentRepos, BlogPostCommentRepos>();
 
 //dataBases
 builder.Services.AddDbContext<BeeBlogDbContext>(options =>
