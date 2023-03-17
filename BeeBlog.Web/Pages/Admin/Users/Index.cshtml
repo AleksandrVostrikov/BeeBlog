@@ -11,6 +11,12 @@
 
 <div>
     <div class="container bg-white">
+        <div class="mb-3 d-flex justify-content-end">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                Добавить пользователя
+            </button>
+        </div>
         <table class="table">
             <thead>
                 <tr>
@@ -26,10 +32,58 @@
                         <td>@item.UserName</td>
                         <td>@item.Email</td>
                         <td>@item.Id</td>
-                        @*<td><a href="/admin/posts/edit/@item.Id">Править</a></td>*@
                     </tr>
                 }
             </tbody>
         </table>
     </div>
 </div>
+
+<!-- Modal -->
+<form method="post">
+    <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Новый пользователь</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <label class="form-label">Имя</label>
+                        <input type="text" class="form-control" asp-for="NewUser.UserName" />
+                    </div>
+                    <div>
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" asp-for="NewUser.Email" />
+                    </div>
+                    <div>
+                        <label class="form-label">Пароль</label>
+                        <input type="password" class="form-control" asp-for="NewUser.Password" />
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="User" checked disabled>
+                            <label class="form-check-label" for="flexCheckDefault" >
+                                Пользователь
+                            </label>
+                        </div>
+                        @if (User.IsInRole("SuperAdmin"))
+                        {
+                            <div class="form-check">
+                            <input class="form-check-input" type="checkbox" asp-for="NewUser.IsAdmin">
+                            <label class="form-check-label" for="flexCheckChecked" >
+                                Администратор
+                            </label>
+                        </div>
+                        }
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
