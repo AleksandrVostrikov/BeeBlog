@@ -32,6 +32,15 @@ namespace BeeBlog.Web.Repositories
             return false;
         }
 
+        public async Task DeleteUser(Guid userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            if (user != null)
+            {
+                await _userManager.DeleteAsync(user);
+            }
+        }
+
         public async Task<IEnumerable<IdentityUser>> GetAllUsers()
         {
            return await _authDbContext.Users

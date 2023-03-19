@@ -12,16 +12,18 @@
             <form method="post">
                 <div class="mb-3">
                     <label class="form-label">Имя пользователя</label>
-                    <input type="text" class="form-control" asp-for="RegisterViewModel.UserName" />
-
+                    <input type="text" class="form-control" asp-for="RegisterViewModel.UserName" required />
+                    <span class="text-danger" asp-validation-for="RegisterViewModel.UserName"></span>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">E-mail</label>
-                    <input type="email" class="form-control" asp-for="RegisterViewModel.Email" />
+                    <input type="email" class="form-control" asp-for="RegisterViewModel.Email" required />
+                    <span class="text-danger" asp-validation-for="RegisterViewModel.Email"></span>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Пароль</label>
-                    <input type="password" class="form-control" asp-for="RegisterViewModel.Password" />
+                    <input type="password" class="form-control" asp-for="RegisterViewModel.Password" required minlength="6"/>
+                    <span class="text-danger" asp-validation-for="RegisterViewModel.Password"></span>
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn bg-warning text-black">Регистрация</button>

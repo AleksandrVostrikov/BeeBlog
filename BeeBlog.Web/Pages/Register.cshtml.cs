@@ -8,7 +8,6 @@ namespace BeeBlog.Web.Pages
     public class RegisterModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
-
         [BindProperty] public Register RegisterViewModel { get; set; }
         public RegisterModel(UserManager<IdentityUser> userManager)
         {
@@ -20,33 +19,41 @@ namespace BeeBlog.Web.Pages
         }
         public async Task<IActionResult> OnPost()
         {
-            var user = new IdentityUser
+            if (ModelState.IsValid)
             {
-                UserName = RegisterViewModel.UserName,
-                Email = RegisterViewModel.Email,
-            };
-            
-            var identityResult = await _userManager.CreateAsync(user, RegisterViewModel.Password);
-            if (identityResult.Succeeded)
-            {
-                var addRoleResult = await _userManager.AddToRoleAsync(user, "User");
-                if (addRoleResult.Succeeded)
+                var user = new IdentityUser
                 {
-                    ViewData["Notification"] = new Notification
-                    {
-                        Message = "Регистрация прошла успешно!",
-                        Type = Enums.NotificationType.Success
-                    };
-                    return Page();
-                }
+                    UserName = RegisterViewModel.UserName,
+                    Email = RegisterViewModel.Email,
+                };
 
+                var identityResult = await _userManager.CreateAsync(user, RegisterViewModel.Password);
+                if (identityResult.Succeeded)
+                {
+                    var addRoleResult = await _userManager.AddToRoleAsync(user, "User");
+                    if (addRoleResult.Succeeded)
+                    {
+                        ViewData["Notification"] = new Notification
+                        {
+                            Message = "Регистрация прошла успешно!",
+                            Type = Enums.NotificationType.Success
+                        };
+                        return Page();
+                    }
+
+                }
+                ViewData["Notification"] = new Notification
+                {
+                    Message = "Произошла ошибка, повторите попытку!",
+                    Type = Enums.NotificationType.Error
+                };
+                return Page();
             }
-            ViewData["Notification"] = new Notification
+            else
             {
-                Message = "Произошла ошибка, повторите попытку!",
-                Type = Enums.NotificationType.Error
-            };
-            return Page();
+                return Page();
+            }
+           
         }
     }
 }

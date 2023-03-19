@@ -4,6 +4,7 @@ using BeeBlog.Web.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
 
 namespace BeeBlog.Web.Pages.Blog
 {
@@ -21,8 +22,9 @@ namespace BeeBlog.Web.Pages.Blog
         public List<BlogComment> Comments { get; set; } = new();
         
         [BindProperty] public Guid BlogPostId { get; set; }
+        [Required(ErrorMessage = "Комментарий пуст")]
+        [MinLength(1, ErrorMessage ="Комментарий должен содержать больше одного символа")]
         [BindProperty] public string BlogPostComment { get; set; }
-
 
         public DetailsModel(
             IPostRepos postRepos, 
@@ -39,6 +41,49 @@ namespace BeeBlog.Web.Pages.Blog
         }
         public async Task<IActionResult> OnGet(string URLhandle)
         {
+            await GetPost(URLhandle);
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPost(string URLhandle)
+        {
+            if (ModelState.IsValid)
+            {
+                if (_signInManager.IsSignedIn(User) && BlogPostComment.Count() > 0)
+                {
+                    var comment = new BlogPostComment()
+                    {
+                        BlogPostId = BlogPostId,
+                        UserId = Guid.Parse(_userManager.GetUserId(User)),
+                        Description = BlogPostComment,
+                        CreatedDate = DateTime.Now
+                    };
+                    await _blogPostCommentRepos.AddCommentAsync(comment);
+                }
+                return RedirectToPage("/blog/details", new { urlhandle = URLhandle });
+            }
+            await GetPost(URLhandle);
+            return Page();
+            
+        }
+
+        private async Task GetComments()
+        {
+            var blogPostComments = await _blogPostCommentRepos.GetAllCommentAsync(BlogPostId);
+            
+            foreach (var bpc in blogPostComments)
+            {
+                Comments.Add(new BlogComment()
+                {
+                    Description = bpc.Description,
+                    CreatedDate = bpc.CreatedDate,
+                    UserName = (await _userManager.FindByIdAsync(bpc.UserId.ToString())).UserName
+                });
+            }
+        }
+
+        private async Task GetPost(string URLhandle)
+        {
             BlogPost = await _postRepos.GetPostAsync(URLhandle);
             if (BlogPost != null)
             {
@@ -51,38 +96,6 @@ namespace BeeBlog.Web.Pages.Blog
                     await GetComments();
                 }
                 TotalLikes = await _likesRepos.GetTotalLikes(BlogPost.Id);
-            }
-
-            return Page();
-        }
-
-        public async Task<IActionResult> OnPost(string URLhandle)
-        {
-            if (_signInManager.IsSignedIn(User) && BlogPostComment.Count() > 0)
-            {
-                var comment = new BlogPostComment()
-                {
-                    BlogPostId = BlogPostId,
-                    UserId = Guid.Parse(_userManager.GetUserId(User)),
-                    Description = BlogPostComment,
-                    CreatedDate = DateTime.Now
-                };
-            await _blogPostCommentRepos.AddCommentAsync(comment);
-            }
-            return RedirectToPage("/blog/details", new { urlhandle = URLhandle });
-        }
-
-        private async Task GetComments()
-        {
-            var blogPostComments = await _blogPostCommentRepos.GetAllCommentAsync(BlogPostId);
-            foreach (var bpc in blogPostComments)
-            {
-                Comments.Add(new BlogComment()
-                {
-                    Description = bpc.Description,
-                    CreatedDate = bpc.CreatedDate,
-                    UserName = (await _userManager.FindByIdAsync(bpc.UserId.ToString())).UserName
-                });
             }
         }
     }

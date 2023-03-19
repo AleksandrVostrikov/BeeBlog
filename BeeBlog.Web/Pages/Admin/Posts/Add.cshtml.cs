@@ -5,6 +5,7 @@ using BeeBlog.Web.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 
 namespace BeeBlog.Web.Pages.Admin.Posts
@@ -16,7 +17,7 @@ namespace BeeBlog.Web.Pages.Admin.Posts
 
         [BindProperty] public AddBlogPost AddBlogPostRequest { get; set; }
         [BindProperty] public IFormFile FeaturedImage { get; set; }
-        [BindProperty] public String Tags { get; set; }
+        [BindProperty] [Required(ErrorMessage ="Необходимы тэги")] public String Tags { get; set; }
 
         public AddModel(IPostRepos postRepos)
         {
@@ -27,28 +28,41 @@ namespace BeeBlog.Web.Pages.Admin.Posts
         }
         public async Task<IActionResult> OnPost()
         {
-            var blogPost = new BlogPost() {
-                Heading = AddBlogPostRequest.Heading,
-                PageTitle = AddBlogPostRequest.PageTitle,
-                PageContent = AddBlogPostRequest.PageContent,
-                ShortDescription = AddBlogPostRequest.ShortDescription,
-                ImageURL = AddBlogPostRequest.ImageURL,
-                URLhandle = AddBlogPostRequest.URLhandle,
-                DateOfPublication = AddBlogPostRequest.DateOfPublication,
-                Author = AddBlogPostRequest.Author,
-                IsVisible = AddBlogPostRequest.IsVisible,
-                Tags = new List<Tags>(Tags.Split(',').Select(x => new Tags() { Name = x.Trim()}))
-            };
-            await _postRepos.AddAsync(blogPost);
-
-            var notification = new Notification
+            ValidateAddBlog();
+            if (ModelState.IsValid)
             {
-                Message = "Публикация создана!",
-                Type = Enums.NotificationType.Success
-            };
-            TempData["Notification"] = JsonSerializer.Serialize(notification);
+                var blogPost = new BlogPost()
+                {
+                    Heading = AddBlogPostRequest.Heading,
+                    PageTitle = AddBlogPostRequest.PageTitle,
+                    PageContent = AddBlogPostRequest.PageContent,
+                    ShortDescription = AddBlogPostRequest.ShortDescription,
+                    ImageURL = AddBlogPostRequest.ImageURL,
+                    URLhandle = AddBlogPostRequest.URLhandle,
+                    DateOfPublication = AddBlogPostRequest.DateOfPublication,
+                    Author = AddBlogPostRequest.Author,
+                    IsVisible = AddBlogPostRequest.IsVisible,
+                    Tags = new List<Tags>(Tags.Split(',').Select(x => new Tags() { Name = x.Trim() }))
+                };
+                await _postRepos.AddAsync(blogPost);
 
-            return RedirectToPage("/Admin/Posts/List");
+                var notification = new Notification
+                {
+                    Message = "Публикация создана!",
+                    Type = Enums.NotificationType.Success
+                };
+                TempData["Notification"] = JsonSerializer.Serialize(notification);
+
+                return RedirectToPage("/Admin/Posts/List");
+            }
+            return Page();
+        }
+        private void ValidateAddBlog()
+        {
+            if (AddBlogPostRequest.DateOfPublication.ToString() == "")
+            {
+                ModelState.AddModelError("AddBlogPostRequest.DateOfPublication", "Неверный формат даты");
+            }
         }
     }
 }

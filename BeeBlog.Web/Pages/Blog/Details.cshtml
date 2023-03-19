@@ -5,19 +5,19 @@
 @inject UserManager<IdentityUser> userManager
 @inject SignInManager<IdentityUser> signInManager
 
-@{
-    ViewData["Title"] = Model.BlogPost.PageTitle;
-}
+@if (Model.BlogPost != null)
+{
+    <div class="container my-5 bg-white">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-6">
+                @{
+                    ViewData["Title"] = Model.BlogPost.PageTitle;
+                }
 
-<div class="container my-5 bg-white">
-    <div class="row justify-content-center">
-        <div class="col-12 col-lg-6">
-            @if (Model.BlogPost != null)
-            {
                 <h1 class="mb-3">
                     @Model.BlogPost.Heading
                 </h1>
-                
+
                 <div class="d-flex justify-content-between mb-3">
                     <span>@Model.BlogPost.Author</span>
                     <span>@Model.BlogPost.DateOfPublication.ToShortDateString()</span>
@@ -56,7 +56,7 @@
                         }
                     }
                 </div>
-                
+
                 <img src="@Model.BlogPost.ImageURL" class="d-block img-fluid mb-3" />
 
                 <div class="mb-3 blog-details">
@@ -71,11 +71,12 @@
                             <form method="post">
                                 <div class="mb-3">
                                     <label class="form-label"></label>
-                                    <input type="text" class="form-control" asp-for="BlogPostComment"/>
+                                    <input type="text" class="form-control" asp-for="BlogPostComment" />
+                                    <span class="text-danger" asp-validation-for="BlogPostComment"></span>
                                 </div>
                                 <div class="mb-3">
                                     <button type="submit" class="btn btn-dark">Отправить</button>
-                                    <input type="hidden" asp-for="BlogPostId"/>
+                                    <input type="hidden" asp-for="BlogPostId" />
                                 </div>
                             </form>
                         }
@@ -100,24 +101,17 @@
                         }
                     </div>
                 </div>
-
-            }
-            else
-            {
-                <h2>Публикация не найдена!</h2>
-            }
+            </div>
         </div>
     </div>
-</div>
-
-@section Scripts{
+    @section Scripts{
     <script>
         const btnLike = document.getElementById('btnLike');
         const totalLikesElement = document.getElementById('totalLikes');
 
-        async function GetTotalLikes(){
-            fetch('/api/blogpostlike/@Model.BlogPost.Id/totalLikes',{
-                method:'GET',
+        async function GetTotalLikes() {
+            fetch('/api/blogpostlike/@Model.BlogPost.Id/totalLikes', {
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': '*/*'
@@ -127,14 +121,14 @@
                 .then(result => totalLikesElement.innerHTML = result);
         }
 
-        async function AddLike(){
+        async function AddLike() {
             fetch('/api/blogpostlike/add', {
-                method:'POST',
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': '*/*'
                 },
-                body: JSON.stringify({ blogPostId: '@Model.BlogPost.Id', userId : '@userManager.GetUserId(User)'})
+                body: JSON.stringify({ blogPostId: '@Model.BlogPost.Id', userId: '@userManager.GetUserId(User)' })
             }).then(() => {
                 btnLike.innerHTML = '<i class="bi bi-hand-thumbs-up-fill"></i>';
                 btnLike.removeEventListener('click', AddLike);
@@ -143,4 +137,11 @@
         }
         btnLike.addEventListener('click', AddLike);
     </script>
+    }
 }
+else
+{
+    <h2>Публикация не найдена!</h2>
+}
+
+

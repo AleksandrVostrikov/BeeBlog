@@ -13,12 +13,13 @@
             <form method="post">
                 <div class="mb-3">
                     <label class="form-label">Имя пользователя</label>
-                    <input type="text" class="form-control" asp-for="LoginViewModel.UserName" />
-
+                    <input type="text" class="form-control" asp-for="LoginViewModel.UserName" required />
+                    <span class="text-danger" asp-validation-for="LoginViewModel.UserName"></span>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Пароль</label>
-                    <input type="password" class="form-control" asp-for="LoginViewModel.Password" />
+                    <input type="password" class="form-control" asp-for="LoginViewModel.Password" required />
+                    <span class="text-danger" asp-validation-for="LoginViewModel.Password"></span>
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn bg-warning text-black">Войти</button>

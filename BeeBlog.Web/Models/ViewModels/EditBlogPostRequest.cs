@@ -3,8 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BeeBlog.Web.Models.ViewModels
 {
-    public class AddBlogPost
+    public class EditBlogPostRequest
     {
+        [Required(ErrorMessage = "Поле не должно быть пустым")] public Guid Id { get; set; }
         [Required(ErrorMessage = "Поле не должно быть пустым")] public string Heading { get; set; }
         [Required(ErrorMessage = "Поле не должно быть пустым")] public string PageTitle { get; set; }
         [Required(ErrorMessage = "Поле не должно быть пустым")] public string PageContent { get; set; }

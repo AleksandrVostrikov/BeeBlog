@@ -6,5 +6,6 @@ namespace BeeBlog.Web.Repositories
     {
         Task<IEnumerable<IdentityUser>> GetAllUsers();
         Task<bool> Add(IdentityUser identityUser, string password, List<string> roles);
+        Task DeleteUser(Guid userId);
     }
 }

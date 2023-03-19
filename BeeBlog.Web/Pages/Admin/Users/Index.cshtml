@@ -17,12 +17,14 @@
                 Добавить пользователя
             </button>
         </div>
+        <form method="post" asp-page-handler="delete" id="deleteUserForm">
         <table class="table">
             <thead>
                 <tr>
                     <td>Имя пользователя</td>
                     <td>Email</td>
                     <td>Id</td>
+                    <td></td>
                 </tr>
             </thead>
             <tbody>
@@ -32,10 +34,22 @@
                         <td>@item.UserName</td>
                         <td>@item.Email</td>
                         <td>@item.Id</td>
+                        <td>
+                            @if (User.IsInRole("SuperAdmin"))
+                            {
+                                <a class="btn btn-danger user-delete-btn" data-id ="@item.Id">
+                                    Удалить
+                                </a>
+                            }   
+                            
+                        </td>
                     </tr>
                 }
             </tbody>
         </table>
+            <input type="hidden" asp-for="SelectedUserId" id="selectedUserId"/>
+        </form>
+    
     </div>
 </div>
 
@@ -51,15 +65,18 @@
                 <div class="modal-body">
                     <div>
                         <label class="form-label">Имя</label>
-                        <input type="text" class="form-control" asp-for="NewUser.UserName" />
+                        <input type="text" class="form-control" asp-for="NewUser.UserName" required/>
+                        <span class="text-danger" asp-validation-for="NewUser.UserName"></span>
                     </div>
                     <div>
                         <label class="form-label">Email</label>
-                        <input type="email" class="form-control" asp-for="NewUser.Email" />
+                        <input type="email" class="form-control" asp-for="NewUser.Email" required/>
+                        <span class="text-danger" asp-validation-for="NewUser.Email"></span>
                     </div>
                     <div>
                         <label class="form-label">Пароль</label>
-                        <input type="password" class="form-control" asp-for="NewUser.Password" />
+                        <input type="password" class="form-control" asp-for="NewUser.Password" required/>
+                        <span class="text-danger" asp-validation-for="NewUser.Password"></span>
                     </div>
                     <div class="mb-3">
                         <div class="form-check">
@@ -87,3 +104,19 @@
         </div>
     </div>
 </form>
+
+@section Scripts {
+    <script>
+        const userDeleteElement = document.querySelectorAll('.user-delete-btn');
+        const selectedUserIdElement = document.getElementById('selectedUserId');
+        const deleteUserForm = document.getElementById('deleteUserForm');
+        
+        userDeleteElement.forEach((element) => {
+            element.addEventListener('click', function () {
+                const userId = element.dataset.id;
+                selectedUserIdElement.value = userId;
+                deleteUserForm.submit();
+            })
+        })
+    </script>
+}

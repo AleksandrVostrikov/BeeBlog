@@ -19,27 +19,31 @@ namespace BeeBlog.Web.Pages
         {
         }
 
-        public async Task<IActionResult> OnPost(string ReturnUrl)
+        public async Task<IActionResult> OnPost(string? ReturnUrl)
         {
-            var signInResult = await _signInManager.PasswordSignInAsync(
+            if (ModelState.IsValid)
+            {
+                var signInResult = await _signInManager.PasswordSignInAsync(
                 LoginViewModel.UserName, LoginViewModel.Password, false, false);
-            if (signInResult.Succeeded)
-            {
-                if (!string.IsNullOrWhiteSpace(ReturnUrl))
+                if (signInResult.Succeeded)
                 {
-                    return RedirectToPage(ReturnUrl);
+                    if (!string.IsNullOrWhiteSpace(ReturnUrl))
+                    {
+                        return RedirectToPage(ReturnUrl);
+                    }
+                    return RedirectToPage("index");
                 }
-                return RedirectToPage("index");
-            }
-            else
-            {
-                ViewData["Notification"] = new Notification
+                else
                 {
-                    Message = "„то-то пошло не так, повторите попытку",
-                    Type = Enums.NotificationType.Error
-                };
-                return Page();
+                    ViewData["Notification"] = new Notification
+                    {
+                        Message = "„то-то пошло не так, повторите попытку",
+                        Type = Enums.NotificationType.Error
+                    };
+                    return Page();
+                }
             }
+            return Page();
         }
     }
 }

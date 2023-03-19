@@ -1,8 +1,11 @@
-﻿namespace BeeBlog.Web.Models.ViewModels
+﻿using Duende.IdentityServer.Models;
+using System.ComponentModel.DataAnnotations;
+
+namespace BeeBlog.Web.Models.ViewModels
 {
     public class Login
     {
-        public string UserName { get; set;}
-        public string Password { get; set;}
+        [Required(ErrorMessage = "Заполните имя пользователя")] public string UserName { get; set;}
+        [Required(ErrorMessage = "Укажите пароль")] public string Password { get; set;}
     }
 }
