@@ -1,0 +1,14 @@
+﻿body {
+    height: 100%
+}
+.bgImageLogin {
+    background-image: url(../Images/bgLogin.png);
+    background-repeat: no-repeat;
+    border-radius: 25px;
+    width: 768px;
+    height: 560px;
+}
+.boxConteiner {
+    max-width: 800px;
+    min-height: 680px;
+}
