@@ -4,20 +4,19 @@
 }
 <link rel="stylesheet" href="~/css/Login.css">
 
-<div class="container boxConteiner d-flex align-items-center justify-content-center">
-    <div class="row justify-content-center">
+<div class="boxCont container d-flex align-items-center justify-content-center">
+    <div class="row">
         <div class="bgImageLogin col-12 col-lg-6">
-            <h1 class="mb-3 h3 text-white col-md-8 offset-md-3">Войти</h1>
+            <h1 class="shadowtext mb-3 h3 text-light col-md-8 offset-md-3">Войти</h1>
             <partial name="_Notification" />
-
             <form method="post">
                 <div class="mb-3 w-50 mx-auto">
-                    <label class="form-label text-white">Имя пользователя</label>
+                    <label class="shadowtext form-label text-white">Имя пользователя</label>
                     <input type="text" class="form-control" asp-for="LoginViewModel.UserName" required />
                     <span class="text-danger" asp-validation-for="LoginViewModel.UserName"></span>
                 </div>
                 <div class="mb-3 w-50 mx-auto">
-                    <label class="form-label text-white">Пароль</label>
+                    <label class="shadowtext form-label text-white">Пароль</label>
                     <input type="password" class="form-control" asp-for="LoginViewModel.Password" required />
                     <span class="text-danger" asp-validation-for="LoginViewModel.Password"></span>
                 </div>
